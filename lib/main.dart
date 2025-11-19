@@ -13,7 +13,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Rental Mobil App',
       theme: ThemeData(
+        // Tema Warna Biru Profesional (Indigo)
         primarySwatch: Colors.indigo,
+        scaffoldBackgroundColor: const Color(0xFFF5F7FA), // Latar abu-abu sangat muda (Modern)
         useMaterial3: true,
       ),
       home: const Scaffold(body: Center(child: Text("Setup Awal"))),
