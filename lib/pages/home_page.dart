@@ -107,15 +107,6 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
-          const Expanded(
-            child: Center(
-              child: Text(
-                "Menu & Mobil akan muncul di sini\n(Lanjut ke Tahap 2)",
-                textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.grey),
-              ),
-            ),
-          ),
         ],
       ),
     );
