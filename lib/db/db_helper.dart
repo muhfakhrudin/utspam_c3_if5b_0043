@@ -68,4 +68,15 @@ class DBHelper {
     if (res.isNotEmpty) return res.first;
     return null;
   }
+
+  Future<Map<String, dynamic>?> getUser(String username) async {
+    final db = await instance.database;
+    final res = await db.query(
+      'users',
+      where: 'username = ?',
+      whereArgs: [username],
+    );
+    if (res.isNotEmpty) return res.first;
+    return null;
+  }
 }

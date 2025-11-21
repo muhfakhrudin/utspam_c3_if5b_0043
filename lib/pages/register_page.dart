@@ -165,8 +165,9 @@ class _RegisterPageState extends State<RegisterPage> {
                         ],
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
-                          if (value == null || value.isEmpty)
+                          if (value == null || value.isEmpty) {
                             return 'No HP tidak boleh kosong';
+                          }
                           if (value.length < 10) return 'Minimal 10 digit';
                           return null;
                         },
@@ -185,8 +186,9 @@ class _RegisterPageState extends State<RegisterPage> {
                         keyboardType: TextInputType.emailAddress,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
-                          if (value == null || value.isEmpty)
+                          if (value == null || value.isEmpty) {
                             return 'Email kosong';
+                          }
                           if (!value.contains('@')) return 'Email tidak valid';
                           return null;
                         },
@@ -224,8 +226,9 @@ class _RegisterPageState extends State<RegisterPage> {
                         obscureText: _isObscure,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
-                          if (value == null || value.isEmpty)
+                          if (value == null || value.isEmpty) {
                             return 'Password kosong';
+                          }
                           if (value.length < 6) return 'Minimal 6 karakter';
                           return null;
                         },
@@ -264,7 +267,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           borderRadius: BorderRadius.circular(12),
                         ),
                       ),
-                      onPressed: _prosesRegister, 
+                      onPressed: _prosesRegister,
                       child: const Text(
                         'DAFTAR SEKARANG',
                         style: TextStyle(

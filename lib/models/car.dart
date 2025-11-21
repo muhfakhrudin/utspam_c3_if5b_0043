@@ -2,7 +2,7 @@ class Car {
   final String nama;
   final String tipe;
   final int harga;
-  final String gambar; // Path asset
+  final String gambar; 
 
   Car({
     required this.nama,
@@ -17,7 +17,7 @@ final List<Car> dummyCars = [
     nama: "Toyota Avanza",
     tipe: "MPV",
     harga: 300000,
-    gambar: "assets/images/avanza.jpg", //gamabr nantia e lah
+    gambar: "assets/images/avanza.jpg",
   ),
   Car(
     nama: "Honda Brio",

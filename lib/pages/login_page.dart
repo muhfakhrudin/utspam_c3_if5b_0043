@@ -28,7 +28,7 @@ class _LoginPageState extends State<LoginPage> {
       if (userData != null) {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => const HomePage()),
+          MaterialPageRoute(builder: (context) => HomePage()),
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -44,15 +44,14 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white, // Latar putih bersih
+      backgroundColor: Colors.white,
       body: SafeArea(
-        // --- STRUKTUR BARU: SingleChildScrollView agar bisa discroll ---
         child: SingleChildScrollView(
           child: Center(
             child: Padding(
               padding: const EdgeInsets.all(30.0),
               child: Form(
-                key: _formKey, // Kunci validasi form
+                key: _formKey,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -71,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
                     const SizedBox(height: 20),
 
                     const Text(
-                      "Selamat Datang",
+                      "Selamat Datang ",
                       style: TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
