@@ -17,7 +17,7 @@ final List<Car> dummyCars = [
     nama: "Toyota Alphard",
     tipe: "Luxury",
     harga: 2500000,
-    gambar: "assets/images/alphard.jpg",
+    gambar: "assets/images/Toyota Alphard.jpg",
   ),
   Car(
     nama: "Honda Brio",
