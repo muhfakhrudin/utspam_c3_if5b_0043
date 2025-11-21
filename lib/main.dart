@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'pages/login_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -7,18 +8,17 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Rental Mobil App',
+      debugShowCheckedModeBanner: false, 
+      title: 'CarRent App',
       theme: ThemeData(
-        // Tema Warna Biru Profesional (Indigo)
         primarySwatch: Colors.indigo,
-        scaffoldBackgroundColor: const Color(0xFFF5F7FA), // Latar abu-abu sangat muda (Modern)
+        scaffoldBackgroundColor: const Color(0xFFF5F7FA),
         useMaterial3: true,
       ),
-      home: const Scaffold(body: Center(child: Text("Setup Awal"))),
+      home: const LoginPage(),
     );
   }
 }

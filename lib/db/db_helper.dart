@@ -13,6 +13,7 @@ class DBHelper {
   }
 
   Future<Database> get database async {
+    if (_database != null) return _database!;
     _database = await _initDatabase(dbName);
     return _database!;
   }
@@ -49,22 +50,22 @@ class DBHelper {
         status TEXT NOT NULL
       )
     ''');
+  }
 
-    Future<int> registerUser(Map<String, dynamic> row) async {
-      final db = await instance.database;
-      return await db.insert('users', row);
-    }
+  Future<int> registerUser(Map<String, dynamic> row) async {
+    final db = await instance.database;
+    return await db.insert('users', row);
+  }
 
-    Future<Map<String, dynamic>?> login(String user, String pass) async {
-      final db = await instance.database;
-      final res = await db.query(
-        'users',
-        where: 'username = ? AND password = ?',
-        whereArgs: [user, pass],
-      );
+  Future<Map<String, dynamic>?> login(String user, String pass) async {
+    final db = await instance.database;
+    final res = await db.query(
+      'users',
+      where: 'username = ? AND password = ?',
+      whereArgs: [user, pass],
+    );
 
-      if (res.isNotEmpty) return res.first;
-      return null;
-    }
+    if (res.isNotEmpty) return res.first;
+    return null;
   }
 }
