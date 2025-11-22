@@ -148,7 +148,11 @@ class _HistoryPageState extends State<HistoryPage> {
                                 ),
                               ),
                               Text(
-                                "Rp ${transaction['totalBiaya']}",
+                                NumberFormat.currency(
+                                  locale: 'id',
+                                  symbol: 'Rp ',
+                                  decimalDigits: 0,
+                                ).format(transaction['totalBiaya']),
                                 style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,

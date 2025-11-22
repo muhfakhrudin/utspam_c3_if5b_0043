@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:utspam_c3_if5b_0043/models/car.dart';
 import 'package:utspam_c3_if5b_0043/db/db_helper.dart';
 import 'form_rental_page.dart';
@@ -267,7 +268,7 @@ class _HomePageState extends State<HomePage> {
                                 child: Text(
                                   car.tipe,
                                   style: TextStyle(
-                                    fontSize: 10,
+                                    fontSize: 13,
                                     color: Colors.blue.shade700,
                                   ),
                                 ),
@@ -277,18 +278,22 @@ class _HomePageState extends State<HomePage> {
                           Row(
                             children: [
                               Text(
-                                "Rp ${car.harga}",
+                                NumberFormat.currency(
+                                  locale: 'id',
+                                  symbol: 'Rp ',
+                                  decimalDigits: 0,
+                                ).format(car.harga),
                                 style: const TextStyle(
                                   color: Colors.indigo,
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 14,
+                                  fontSize: 15,
                                 ),
                               ),
                               const Text(
                                 "/hr",
                                 style: TextStyle(
-                                  fontSize: 10,
-                                  color: Colors.grey,
+                                  fontSize:13 ,
+                                  color: Colors.black,
                                 ),
                               ),
                               const SizedBox(width: 10),
