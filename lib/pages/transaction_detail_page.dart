@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:utspam_c3_if5b_0043/db/db_helper.dart';
 import 'edit_rental_page.dart';
 
+
 class TransactionDetailPage extends StatefulWidget {
   final Map<String, dynamic> transaksi;
   const TransactionDetailPage({super.key, required this.transaksi});
@@ -42,6 +43,7 @@ class _TransactionDetailPageState extends State<TransactionDetailPage> {
       appBar: AppBar(
         title: const Text("Detail Pesanan"),
         backgroundColor: Colors.indigo,
+        foregroundColor: Colors.white,
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
@@ -76,7 +78,7 @@ class _TransactionDetailPageState extends State<TransactionDetailPage> {
                 onPressed: () async {
                   final result = await Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (_) => EditRentalPage()),
+                    MaterialPageRoute(builder: (_) => EditRentalPage( transaksi: _data)),
                   );
                   if (result != null) {
                     setState(() => _data = result);
