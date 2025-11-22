@@ -79,4 +79,29 @@ class DBHelper {
     if (res.isNotEmpty) return res.first;
     return null;
   }
+
+  Future<int> addTransaction(Map<String, dynamic> row) async {
+    final db = await instance.database;
+    return await db.insert('transactions', row);
+  }
+
+  Future<List<Map<String, dynamic>>> getTransactions() async {
+    final db = await instance.database;
+    return await db.query('transactions', orderBy: 'id DESC');
+  }
+
+  Future<int> updateTransaction(Map<String, dynamic> row) async {
+    final db = await instance.database;
+    return await db.update(
+      'transactions',
+      row,
+      where: 'id = ?',
+      whereArgs: [row['id']],
+    );
+  }
+
+  Future<int> deleteTransaction(int id) async {
+    final db = await instance.database;
+    return await db.delete('transactions', where: 'id = ?', whereArgs: [id]);
+  }
 }

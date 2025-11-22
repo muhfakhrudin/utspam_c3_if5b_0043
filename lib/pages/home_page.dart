@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import '../models/car.dart';
+import 'package:utspam_c3_if5b_0043/models/car.dart';
 import 'form_rental_page.dart';
 import 'history_page.dart';
-import 'profile_page.dart';
 import 'login_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -288,11 +287,11 @@ class _HomePageState extends State<HomePage> {
                                   minimumSize: const Size(0, 36),
                                 ),
                                 onPressed: () {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        "Memilih ${car.nama} (Formulir Sewa belum aktif)",
-                                      ),
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          FormRentalPage(car: car),
                                     ),
                                   );
                                 },
