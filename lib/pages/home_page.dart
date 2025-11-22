@@ -19,6 +19,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
+  final TextEditingController _searchCtrl = TextEditingController();
+  String _searchText = "";
+
   String _namaLengkap = "";
 
   void _getNamaLengkap() async {
@@ -31,6 +34,13 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
+
+  @override
+  void dispose() {
+    _searchCtrl.dispose();
+    super.dispose();
+  }
+  
   void initState() {
     super.initState();
     _getNamaLengkap();
@@ -292,7 +302,7 @@ class _HomePageState extends State<HomePage> {
                               const Text(
                                 "/hr",
                                 style: TextStyle(
-                                  fontSize:13 ,
+                                  fontSize: 13,
                                   color: Colors.black,
                                 ),
                               ),
