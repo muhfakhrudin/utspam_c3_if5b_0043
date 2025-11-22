@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:utspam_c3_if5b_0043/db/db_helper.dart   ';
+import 'package:utspam_c3_if5b_0043/db/db_helper.dart';
 import 'home_page.dart';
 import 'register_page.dart';
 
@@ -30,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
           context,
           MaterialPageRoute(
             builder: (context) =>
-                HomePage(username: userData['nama'] ?? "Pengguna"),
+                HomePage(username: user),
           ),
         );
       } else {

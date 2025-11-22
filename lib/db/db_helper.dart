@@ -34,7 +34,7 @@ class DBHelper {
         email TEXT NOT NULL,
         telepon TEXT NOT NULL,
         alamat TEXT NOT NULL,
-        username TEXT NOT NULL,
+        username TEXT NOT NULL UNIQUE,
         password TEXT NOT NULL
       )
     ''');

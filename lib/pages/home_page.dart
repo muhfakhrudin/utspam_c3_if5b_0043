@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:utspam_c3_if5b_0043/models/car.dart';
+import 'package:utspam_c3_if5b_0043/db/db_helper.dart';
 import 'form_rental_page.dart';
 import 'history_page.dart';
 import 'login_page.dart';
+import 'profile_page.dart';
 
 class HomePage extends StatefulWidget {
   final String username;
@@ -15,12 +17,22 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
-  late final List<Widget> _pages;
+
+  String _namaLengkap = "";
+
+  void _getNamaLengkap() async {
+    final user = await DBHelper.instance.getUser(widget.username);
+    if (mounted) {
+      setState(() {
+        _namaLengkap = user != null ? user['nama'] : widget.username;
+      });
+    }
+  }
 
   @override
   void initState() {
     super.initState();
-    _pages = [_buildHomeContent(), const HistoryPage()];
+    _getNamaLengkap();
   }
 
   void _onItemTapped(int index) {
@@ -31,10 +43,16 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final pages = [
+      _buildHomeContent(),
+      const HistoryPage(),
+      ProfilePage(username: widget.username),
+    ];
+
     return Scaffold(
       backgroundColor: const Color(0xFFF5F7FA),
 
-      body: _selectedIndex == 0 ? _buildHomeContent() : _pages[_selectedIndex],
+      body: pages[_selectedIndex],
 
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
@@ -103,7 +121,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                       const SizedBox(height: 5),
                       Text(
-                        widget.username,
+                        _namaLengkap,
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 22,
