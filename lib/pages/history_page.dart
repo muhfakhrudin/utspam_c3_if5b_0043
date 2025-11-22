@@ -25,16 +25,7 @@ class _HistoryPageState extends State<HistoryPage> {
         backgroundColor: Colors.indigo,
         foregroundColor: Colors.white,
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(builder: (context) => const HomePage()),
-              (route) => false,
-            );
-          },
-        ),
+        automaticallyImplyLeading: false,
       ),
       body: FutureBuilder<List<Map<String, dynamic>>>(
         future: DBHelper.instance.getTransactions(),
@@ -167,8 +158,7 @@ class _HistoryPageState extends State<HistoryPage> {
                             ],
                           ),
                           OutlinedButton(
-                            
-                            onPressed: () async{
+                            onPressed: () async {
                               await Navigator.push(
                                 context,
                                 MaterialPageRoute(
