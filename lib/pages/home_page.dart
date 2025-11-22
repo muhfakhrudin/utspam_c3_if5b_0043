@@ -154,23 +154,31 @@ class _HomePageState extends State<HomePage> {
               ),
               const SizedBox(height: 25),
               Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
-                  vertical: 12,
-                ),
                 decoration: BoxDecoration(
                   color: Colors.white.withOpacity(0.15),
                   borderRadius: BorderRadius.circular(15),
                 ),
-                child: Row(
-                  children: const [
-                    Icon(Icons.search, color: Colors.white),
-                    SizedBox(width: 10),
-                    Text(
-                      "Cari mobil impianmu...",
-                      style: TextStyle(color: Colors.white70),
+                child: TextField(
+                  controller: _searchCtrl,
+                  onChanged: (value) {
+                    setState(() {
+                      _searchText = value;
+                    });
+                  },
+                  style: const TextStyle(
+                    color: Colors.white,
+                  ), 
+                  cursorColor: Colors.white,
+                  decoration: const InputDecoration(
+                    hintText: "Cari mobil impianmu...",
+                    hintStyle: TextStyle(color: Colors.white70),
+                    prefixIcon: Icon(Icons.search, color: Colors.white),
+                    border: InputBorder.none,
+                    contentPadding: EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 12,
                     ),
-                  ],
+                  ),
                 ),
               ),
             ],
