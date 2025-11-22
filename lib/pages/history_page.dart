@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:utspam_c3_if5b_0043/db/db_helper.dart';
+import 'transaction_detail_page.dart';
 import 'home_page.dart';
 
 class HistoryPage extends StatefulWidget {
@@ -166,21 +167,18 @@ class _HistoryPageState extends State<HistoryPage> {
                             ],
                           ),
                           OutlinedButton(
-                            onPressed: () {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text(
-                                    "Detail Transaksi (Coming Soon)",
+                            
+                            onPressed: () async{
+                              await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => TransactionDetailPage(
+                                    transaksi: transaction,
                                   ),
                                 ),
                               );
+                              _refreshData();
                             },
-                            style: OutlinedButton.styleFrom(
-                              side: const BorderSide(color: Colors.indigo),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                            ),
                             child: const Text(
                               "Lihat Detail",
                               style: TextStyle(color: Colors.indigo),
