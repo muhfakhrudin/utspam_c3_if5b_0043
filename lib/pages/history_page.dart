@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:utspam_c3_if5b_0043/db/db_helper.dart';
+import 'home_page.dart';
 
 class HistoryPage extends StatefulWidget {
   const HistoryPage({super.key});
@@ -23,7 +24,16 @@ class _HistoryPageState extends State<HistoryPage> {
         backgroundColor: Colors.indigo,
         foregroundColor: Colors.white,
         elevation: 0,
-        automaticallyImplyLeading: false,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => const HomePage()),
+              (route) => false,
+            );
+          },
+        ),
       ),
       body: FutureBuilder<List<Map<String, dynamic>>>(
         future: DBHelper.instance.getTransactions(),
