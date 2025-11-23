@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:utspam_c3_if5b_0043/db/db_helper.dart';
-import 'package:utspam_c3_if5b_0043/pages/history_page.dart';
 import 'package:utspam_c3_if5b_0043/models/car.dart';
 import 'package:utspam_c3_if5b_0043/pages/home_page.dart';
 

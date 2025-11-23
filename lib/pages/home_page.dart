@@ -60,7 +60,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final List<Widget> _pages = [
       _buildHomeContent(),
-      CarListPage(username: widget.username), 
+      CarListPage(username: widget.username),
       const HistoryPage(),
       ProfilePage(username: widget.username),
     ];
@@ -142,7 +142,7 @@ class _HomePageState extends State<HomePage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
-                        "Selamat Datang,",
+                        "Selamat Datang",
                         style: TextStyle(color: Colors.white70, fontSize: 14),
                       ),
                       const SizedBox(height: 5),
@@ -361,7 +361,7 @@ class _HomePageState extends State<HomePage> {
                                                 FormRentalPage(
                                                   car: car,
                                                   username: widget.username,
-                                                )
+                                                ),
                                           ),
                                         );
                                       },
