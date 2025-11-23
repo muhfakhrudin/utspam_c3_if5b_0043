@@ -6,23 +6,27 @@ import 'form_rental_page.dart';
 import 'history_page.dart';
 import 'login_page.dart';
 import 'profile_page.dart';
+import 'car_list_page.dart';
 
 class HomePage extends StatefulWidget {
   final String username;
+  final int initialIndex;
 
-  const HomePage({super.key, this.username = "Pengguna"});
+  const HomePage({
+    super.key,
+    this.username = "Pengguna",
+    this.initialIndex = 0,
+  });
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 0;
-
+  late int _selectedIndex;
+  String _namaLengkap = "";
   final TextEditingController _searchCtrl = TextEditingController();
   String _searchText = "";
-
-  String _namaLengkap = "";
 
   void _getNamaLengkap() async {
     final user = await DBHelper.instance.getUser(widget.username);
@@ -34,15 +38,16 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    _selectedIndex = widget.initialIndex;
+    _getNamaLengkap();
+  }
+
   @override
   void dispose() {
     _searchCtrl.dispose();
     super.dispose();
-  }
-
-  void initState() {
-    super.initState();
-    _getNamaLengkap();
   }
 
   void _onItemTapped(int index) {
@@ -53,8 +58,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final pages = [
+    final List<Widget> _pages = [
       _buildHomeContent(),
+      CarListPage(username: widget.username), 
       const HistoryPage(),
       ProfilePage(username: widget.username),
     ];
@@ -62,7 +68,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: const Color(0xFFF5F7FA),
 
-      body: pages[_selectedIndex],
+      body: _pages[_selectedIndex],
 
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
@@ -81,12 +87,16 @@ class _HomePageState extends State<HomePage> {
               label: 'Beranda',
             ),
             BottomNavigationBarItem(
+              icon: Icon(Icons.directions_car_filled_rounded),
+              label: 'Sewa', // Tombol ke-2
+            ),
+            BottomNavigationBarItem(
               icon: Icon(Icons.history_rounded),
-              label: 'Riwayat',
+              label: 'Riwayat', // Tombol ke-3
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person_rounded),
-              label: 'Profil',
+              label: 'Profil', // Tombol ke-4
             ),
           ],
           currentIndex: _selectedIndex,
@@ -104,6 +114,8 @@ class _HomePageState extends State<HomePage> {
     final filteredCars = dummyCars.where((car) {
       return car.nama.toLowerCase().contains(_searchText.toLowerCase());
     }).toList();
+
+    final displayedCars = filteredCars.take(3).toList();
 
     return Column(
       children: [
@@ -156,6 +168,7 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
               const SizedBox(height: 25),
+
               Container(
                 decoration: BoxDecoration(
                   color: Colors.white.withOpacity(0.15),
@@ -192,15 +205,22 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
-                "Daftar Mobil",
+                "Rekomendasi Mobil",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
 
-              Text(
-                "${filteredCars.length} Mobil",
-                style: const TextStyle(
-                  color: Colors.indigo,
-                  fontWeight: FontWeight.bold,
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    _selectedIndex = 1;
+                  });
+                },
+                child: const Text(
+                  "Lihat Semua",
+                  style: TextStyle(
+                    color: Colors.indigo,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ],
@@ -208,7 +228,7 @@ class _HomePageState extends State<HomePage> {
         ),
 
         Expanded(
-          child: filteredCars.isEmpty
+          child: displayedCars.isEmpty
               ? Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -224,9 +244,9 @@ class _HomePageState extends State<HomePage> {
                 )
               : ListView.builder(
                   padding: const EdgeInsets.symmetric(horizontal: 25),
-                  itemCount: filteredCars.length,
+                  itemCount: displayedCars.length,
                   itemBuilder: (context, index) {
-                    final car = filteredCars[index];
+                    final car = displayedCars[index];
                     return Container(
                       margin: const EdgeInsets.only(bottom: 20),
                       decoration: BoxDecoration(
@@ -252,23 +272,17 @@ class _HomePageState extends State<HomePage> {
                               height: 150,
                               width: double.infinity,
                               fit: BoxFit.cover,
-                              errorBuilder: (ctx, error, stack) {
-                                return Container(
-                                  height: 150,
-                                  width: double.infinity,
-                                  color: Colors.grey[200],
-                                  child: const Center(
-                                    child: Icon(
-                                      Icons.directions_car,
-                                      size: 50,
-                                      color: Colors.grey,
-                                    ),
-                                  ),
-                                );
-                              },
+                              errorBuilder: (ctx, error, stack) => Container(
+                                height: 150,
+                                color: Colors.grey[200],
+                                child: const Icon(
+                                  Icons.directions_car,
+                                  size: 50,
+                                  color: Colors.grey,
+                                ),
+                              ),
                             ),
                           ),
-
                           Padding(
                             padding: const EdgeInsets.all(15),
                             child: Row(
@@ -280,8 +294,8 @@ class _HomePageState extends State<HomePage> {
                                     Text(
                                       car.nama,
                                       style: const TextStyle(
-                                        fontSize: 16,
                                         fontWeight: FontWeight.bold,
+                                        fontSize: 16,
                                       ),
                                     ),
                                     Container(
@@ -297,7 +311,7 @@ class _HomePageState extends State<HomePage> {
                                       child: Text(
                                         car.tipe,
                                         style: TextStyle(
-                                          fontSize: 10,
+                                          fontSize: 13,
                                           color: Colors.blue.shade700,
                                         ),
                                       ),
@@ -321,8 +335,8 @@ class _HomePageState extends State<HomePage> {
                                     const Text(
                                       "/hr",
                                       style: TextStyle(
-                                        fontSize: 10,
-                                        color: Colors.grey,
+                                        fontSize: 13,
+                                        color: Colors.black,
                                       ),
                                     ),
                                     const SizedBox(width: 10),
@@ -336,7 +350,6 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                         padding: const EdgeInsets.symmetric(
                                           horizontal: 15,
-                                          vertical: 0,
                                         ),
                                         minimumSize: const Size(0, 36),
                                       ),
@@ -345,7 +358,10 @@ class _HomePageState extends State<HomePage> {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                FormRentalPage(car: car),
+                                                FormRentalPage(
+                                                  car: car,
+                                                  username: widget.username,
+                                                )
                                           ),
                                         );
                                       },

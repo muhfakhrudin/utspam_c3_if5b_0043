@@ -3,11 +3,17 @@ import 'package:intl/intl.dart';
 import 'package:utspam_c3_if5b_0043/db/db_helper.dart';
 import 'package:utspam_c3_if5b_0043/pages/history_page.dart';
 import 'package:utspam_c3_if5b_0043/models/car.dart';
+import 'package:utspam_c3_if5b_0043/pages/home_page.dart';
 
 class FormRentalPage extends StatefulWidget {
   final Car car;
+  final String username;
 
-  const FormRentalPage({super.key, required this.car});
+  const FormRentalPage({
+    super.key,
+    required this.car,
+    this.username = "Pengguna",
+  });
 
   @override
   State<FormRentalPage> createState() => _FormRentalPageState();
@@ -76,9 +82,13 @@ class _FormRentalPageState extends State<FormRentalPage> {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text("Sewa Berhasil! Masuk ke Riwayat.")),
         );
-        Navigator.pushReplacement(
+        Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => const HistoryPage()),
+          MaterialPageRoute(
+            builder: (context) =>
+                HomePage(username: widget.username, initialIndex: 2),
+          ),
+          (route) => false,
         );
       }
     }

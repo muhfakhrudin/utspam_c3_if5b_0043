@@ -31,4 +31,22 @@ final List<Car> dummyCars = [
     harga: 700000,
     gambar: "assets/images/ertiga.jpg",
   ),
+  Car(
+    nama: "Mitsubishi Pajero",
+    tipe: "SUV",
+    harga: 800000,
+    gambar: "assets/images/Pajero.jpg",
+  ),
+  Car(
+    nama: "Honda Civic",
+    tipe: "Sedan",
+    harga: 900000,
+    gambar: "assets/images/Civic.jpg",
+  ), 
+  Car(
+    nama: "Daihatsu Gran Max PU",
+    tipe: "Pickup",
+    harga: 250000,
+    gambar: "assets/images/granmax.jpg",
+  ),
 ];
